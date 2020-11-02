@@ -9,6 +9,11 @@ variable "name" {
   type        = string
   default     = ""
 }
+variable "vpc_id" {
+  description = "vpc_id as identifier"
+  type        = string
+  default     = ""
+}
 
 variable "cidr" {
   description = "The CIDR block for the VPC. Default value is a valid CIDR, but not acceptable by AWS and should be overridden"
