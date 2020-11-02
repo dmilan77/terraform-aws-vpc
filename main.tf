@@ -600,7 +600,7 @@ resource "aws_default_network_acl" "this" {
 resource "aws_network_acl" "public" {
   count = var.create_vpc && var.public_dedicated_network_acl && length(var.public_subnets) > 0 ? 1 : 0
 
-  vpc_id     = element(concat(var.vpc_id, [""]), 0)
+  vpc_id     = element(concat([var.vpc_id], [""]), 0)
   subnet_ids = aws_subnet.public.*.id
 
   tags = merge(
@@ -652,7 +652,7 @@ resource "aws_network_acl_rule" "public_outbound" {
 resource "aws_network_acl" "private" {
   count = var.create_vpc && var.private_dedicated_network_acl && length(var.private_subnets) > 0 ? 1 : 0
 
-  vpc_id     = element(concat(var.vpc_id, [""]), 0)
+  vpc_id     = element(concat([var.vpc_id], [""]), 0)
   subnet_ids = aws_subnet.private.*.id
 
   tags = merge(
@@ -704,7 +704,7 @@ resource "aws_network_acl_rule" "private_outbound" {
 resource "aws_network_acl" "intra" {
   count = var.create_vpc && var.intra_dedicated_network_acl && length(var.intra_subnets) > 0 ? 1 : 0
 
-  vpc_id     = element(concat(var.vpc_id, [""]), 0)
+  vpc_id     = element(concat([var.vpc_id], [""]), 0)
   subnet_ids = aws_subnet.intra.*.id
 
   tags = merge(
@@ -756,7 +756,7 @@ resource "aws_network_acl_rule" "intra_outbound" {
 resource "aws_network_acl" "database" {
   count = var.create_vpc && var.database_dedicated_network_acl && length(var.database_subnets) > 0 ? 1 : 0
 
-  vpc_id     = element(concat(var.vpc_id, [""]), 0)
+  vpc_id     = element(concat([var.vpc_id], [""]), 0)
   subnet_ids = aws_subnet.database.*.id
 
   tags = merge(
@@ -808,7 +808,7 @@ resource "aws_network_acl_rule" "database_outbound" {
 resource "aws_network_acl" "redshift" {
   count = var.create_vpc && var.redshift_dedicated_network_acl && length(var.redshift_subnets) > 0 ? 1 : 0
 
-  vpc_id     = element(concat(var.vpc_id, [""]), 0)
+  vpc_id     = element(concat([var.vpc_id], [""]), 0)
   subnet_ids = aws_subnet.redshift.*.id
 
   tags = merge(
@@ -860,7 +860,7 @@ resource "aws_network_acl_rule" "redshift_outbound" {
 resource "aws_network_acl" "elasticache" {
   count = var.create_vpc && var.elasticache_dedicated_network_acl && length(var.elasticache_subnets) > 0 ? 1 : 0
 
-  vpc_id     = element(concat(var.vpc_id, [""]), 0)
+  vpc_id     = element(concat([var.vpc_id], [""]), 0)
   subnet_ids = aws_subnet.elasticache.*.id
 
   tags = merge(
