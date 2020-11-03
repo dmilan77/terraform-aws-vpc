@@ -50,7 +50,7 @@ resource "aws_vpc" "this" {
 resource "aws_vpc_ipv4_cidr_block_association" "this" {
   count = var.create_vpc && length(var.secondary_cidr_blocks) > 0 ? length(var.secondary_cidr_blocks) : 0
 
-  vpc_id = lcoal.vpc_id
+  vpc_id = local.vpc_id
 
   cidr_block = element(var.secondary_cidr_blocks, count.index)
 }
@@ -58,7 +58,7 @@ resource "aws_vpc_ipv4_cidr_block_association" "this" {
 resource "aws_default_security_group" "this" {
   count = var.create_vpc && var.manage_default_security_group ? 1 : 0
 
-  vpc_id = var.vpc_id
+  vpc_id = local.vpc_id
 
   dynamic "ingress" {
     for_each = var.default_security_group_ingress
